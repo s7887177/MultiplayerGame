@@ -166,11 +166,13 @@ public class WebSocketExperiemnt : MonoBehaviour
                         var args = JsonUtility.FromJson<BulletHitEventArgs>(e.Data);
                         lock (onceAction)
                         {
+                            Debug.Log("BulletHit1");
                             onceAction += () =>
                             {
+                                Debug.Log("BulletHit2");
                                 if (players.ContainsKey(args.data.id))
                                 {
-                                    Debug.Log("BulletHit123");
+                                    Debug.Log("BulletHit3");
                                     var player = players[args.data.hitPlayerId];
                                     player.TakeDamage(args.data.atk);
                                 }
@@ -328,7 +330,7 @@ class FireEventData
     [SerializeField] public Quaternion bulletRotation;
 }
 [System.Serializable]
-class BulletHitEventArgs
+class BulletHitEventArgs : System.EventArgs
 {
     [SerializeField] string type = "BulletHit";
     [SerializeField] public BulletEventData data;
