@@ -172,11 +172,12 @@ public class WebSocketExperiemnt : MonoBehaviour
                             Debug.Log("BulletHit1");
                             onceAction += () =>
                             {
-                                Debug.Log($"BulletHit2 : {args.data.id}");
+                                Debug.Log($"BulletHit2 : {args.data.id}, {args.data.atk}");
                                 if (players.ContainsKey(args.data.id))
                                 {
                                     Debug.Log("BulletHit3");
                                     var player = players[args.data.hitPlayerId];
+                                    
                                     player.TakeDamage(args.data.atk);
                                 }
                             };
