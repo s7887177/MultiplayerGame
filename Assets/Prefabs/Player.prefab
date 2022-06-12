@@ -309,7 +309,7 @@ MonoBehaviour:
   speed: 5
   rotSpeedX: 150
   rotSpeedY: 150
-  isMine: 1
+  isMine: 0
   anotherInt: 0
   gun: {fileID: 6301502592104400002}
   jumpForce: {x: 0, y: 4, z: 0}

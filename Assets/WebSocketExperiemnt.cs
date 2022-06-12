@@ -63,6 +63,7 @@ public class WebSocketExperiemnt : MonoBehaviour
                         var args = JsonUtility.FromJson<InitPlayerEventArgs>(e.Data);
                         this.id = args.data.id;
                         players[id] = this.player;
+                        this.player.id = id;
                         lock (onceAction)
                         {
                             onceAction += () =>
@@ -153,6 +154,7 @@ public class WebSocketExperiemnt : MonoBehaviour
                             {
                                 if (players.ContainsKey(args.data.id))
                                 {
+                                    Debug.Log("Fire123");
                                     var player = players[args.data.id];
                                     player.Fire(args.data.bulletPosition, args.data.bulletRotation);
                                 }

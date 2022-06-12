@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Fire(Vector3 position, Quaternion rotation)
     {
+        Debug.Log("12341234");
         var bullet = GameObject.Instantiate(bulletPrefab, position, rotation);
         bullet.GetComponent<Rigidbody>().AddForce(bulletForce * bullet.transform.forward, ForceMode.Impulse);
     }
@@ -78,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
     {
         InitializeImage();
         if (!isMine) return;
+        Debug.Log("Player Awake:Log");
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         FindObjectOfType<CameraFollow>().gunPlaceHoder.position = gun.position;
