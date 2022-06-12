@@ -53,7 +53,11 @@ public class PlayerMovement : MonoBehaviour
             color= Color.Lerp(Color.red, Color.yellow, hpRatio*2);
         }
         hpBar.color = color;
-        if (isMine) localHpBar.color = color;
+        if (isMine && localHpBar)
+        {
+            
+            localHpBar.color = color;
+        }
     }
 
     public Projectile bulletPrefab;
