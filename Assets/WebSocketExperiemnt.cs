@@ -129,7 +129,7 @@ public class WebSocketExperiemnt : MonoBehaviour
                                     Object.Destroy(player.gameObject);
                                     players.Remove(args.data.id);
                                 }
-                            };
+                            };  
                         }
                     }
                     break;
@@ -170,7 +170,10 @@ public class WebSocketExperiemnt : MonoBehaviour
         Debug.Log(nameof(OnClose));
         LogEventInfos(sender, e);
     }
-
+    private void OnDestroy()
+    {
+        
+    }
     private void OnDisable()
     {
         ws.Close();

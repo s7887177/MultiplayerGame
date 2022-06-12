@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float hp = 100;
     public float hpRatio => hp / maxHp;
     public Image hpBar;
+    public Image localHpBar;
     [Sirenix.OdinInspector.Button]
     public void TakeDamage(float atk)
     {
@@ -31,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Die()
     {
-        Debug.Log(nameof(Die));
+        this.gameObject.SetActive(false);
     }
     public void Fire()
     {
@@ -42,14 +43,17 @@ public class PlayerMovement : MonoBehaviour
     {
         
         hpBar.fillAmount = hpRatio;
+        var color = Color.white;
         if(hpRatio > .5f)
         {
-            hpBar.color = Color.Lerp(Color.yellow, Color.green, (hpRatio-.5f)*2);
+            color = Color.Lerp(Color.yellow, Color.green, (hpRatio-.5f)*2);
         }
         else
         {
-            hpBar.color = Color.Lerp(Color.red, Color.yellow, hpRatio*2);
+            color= Color.Lerp(Color.red, Color.yellow, hpRatio*2);
         }
+        hpBar.color = color;
+        if (isMine) localHpBar.color = color;
     }
 
     public Projectile bulletPrefab;
