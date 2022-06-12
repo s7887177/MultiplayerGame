@@ -305,6 +305,8 @@ class InitPlayerEventData
 {
     [SerializeField] internal string id;
     [SerializeField] internal MovePlayerEventArgs[] others;
+
+    
 }
 
 [System.Serializable]
@@ -346,7 +348,6 @@ class BulletEventData
     [SerializeField] public string hitPlayerId;
     [SerializeField] internal float atk;
 }
-
 class MessageSender
 {
 
