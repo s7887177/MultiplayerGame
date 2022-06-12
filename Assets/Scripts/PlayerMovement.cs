@@ -3,9 +3,11 @@ using UnityEngine.InputSystem;
 #endif
 using UnityEngine;
 using UnityEngine.UI;
+using WebSocketSharp;
+
 public class PlayerMovement : MonoBehaviour
 {
-    
+    public WebSocket ws => FindObjectOfType<WebSocketExperiemnt>()?.ws;
     public float maxHp = 100;
     public float hp = 100;
     public float hpRatio => hp / maxHp;
@@ -84,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
         HandleInput();
         GunUpdate();
     }
+    
     private void MoveUpdate()
     {
         if (!isMine) return;
@@ -112,17 +115,27 @@ public class PlayerMovement : MonoBehaviour
     }
     private void GunUpdate()
     {
+        if (!isMine) return;
         var gunPlaceHolder = GameObject.FindObjectOfType<CameraFollow>().gunPlaceHoder;
         gun.position = gunPlaceHolder.position;
         gun.rotation = gunPlaceHolder.rotation;
     }
     private void HandleInput()
     {
-        if(Input.GetKeyDown(KeyCode.Space)&& groundChecker.isGround){
+        if (!isMine) return;
+        if (Input.GetKeyDown(KeyCode.Space)&& groundChecker.isGround){
             Jump();
         }
         if (Input.GetMouseButtonDown(0))
         {
+            var args = new FireEventArgs
+            {
+                data = new FireEventData
+                {
+                    id = this.id,
+                }
+            };
+            ws.Send(JsonUtility.ToJson(args));
             Fire();
         }
     }

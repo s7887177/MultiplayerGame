@@ -5,14 +5,15 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
 
-class WebSocketExperiemnt : MonoBehaviour
+public class WebSocketExperiemnt : MonoBehaviour
 {
+
     [SerializeField] string host = "localhost";
     [SerializeField] int port = 8080;
     readonly Dictionary<string, PlayerMovement> players = new Dictionary<string, PlayerMovement>();
     [SerializeField] string[] ids;
     [SerializeField] PlayerMovement[] i_players;
-    WebSocket ws;
+    public WebSocket ws;
     [SerializeField]
     string id;
     [SerializeField]
@@ -140,6 +141,22 @@ class WebSocketExperiemnt : MonoBehaviour
                         Debug.Log($"{nameof(dogName)}: {dogName}");
                     }
                     break;
+                case "Fire":
+                    {
+                        var args = JsonUtility.FromJson<FireEventArgs>(e.Data);
+                        lock (onceAction)
+                        {
+                            onceAction += () =>
+                            {
+                                if (players.ContainsKey(args.data.id))
+                                {
+                                    var player = players[args.data.id];
+                                    player.Fire();
+                                }
+                            };
+                        }
+                    }
+                    break;
                 default:
                     break;
             }
@@ -163,7 +180,7 @@ class WebSocketExperiemnt : MonoBehaviour
     {
         ids = players.Select(kvp => kvp.Key).ToArray();
         i_players = players.Select(kvp => kvp.Value).ToArray();
-        var movePlayerArgs = new MovePlayerEventArgs()
+        var movePlayerArgs = new MovePlayerEventArgs
         {
             data = new MovePlayerEventData()
             {
@@ -264,6 +281,19 @@ class PlayerExitEventArgs : System.EventArgs
 class PlayerExitEventData
 {
     [SerializeField] internal string id;
+}
+
+[System.Serializable]
+class FireEventArgs : System.EventArgs
+{
+    [SerializeField] string type = "Fire";
+    [SerializeField] public FireEventData data;
+}
+
+[System.Serializable]
+class FireEventData
+{
+    public string id;
 }
 class MessageSender
 {
