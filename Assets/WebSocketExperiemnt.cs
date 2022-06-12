@@ -154,9 +154,25 @@ public class WebSocketExperiemnt : MonoBehaviour
                             {
                                 if (players.ContainsKey(args.data.id))
                                 {
-                                    Debug.Log("Fire123");
                                     var player = players[args.data.id];
                                     player.Fire(args.data.bulletPosition, args.data.bulletRotation);
+                                }
+                            };
+                        }
+                    }
+                    break;
+                case "BulletHit":
+                    {
+                        var args = JsonUtility.FromJson<BulletHitEventArgs>(e.Data);
+                        lock (onceAction)
+                        {
+                            onceAction += () =>
+                            {
+                                if (players.ContainsKey(args.data.id))
+                                {
+                                    Debug.Log("BulletHit123");
+                                    var player = players[args.data.hitPlayerId];
+                                    player.TakeDamage(args.data.atk);
                                 }
                             };
                         }
@@ -311,6 +327,20 @@ class FireEventData
     [SerializeField] public Vector3 bulletPosition;
     [SerializeField] public Quaternion bulletRotation;
 }
+[System.Serializable]
+class BulletHitEventArgs
+{
+    [SerializeField] string type = "BulletHit";
+    [SerializeField] public BulletEventData data;
+}
+[System.Serializable]
+class BulletEventData
+{
+    public string id;
+    [SerializeField] public string hitPlayerId;
+    internal float atk;
+}
+
 class MessageSender
 {
 

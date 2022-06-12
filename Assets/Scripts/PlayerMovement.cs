@@ -1,6 +1,7 @@
 ﻿#if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using WebSocketSharp;
@@ -56,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         hpBar.color = color;
         if (isMine && localHpBar)
         {
-            
+            localHpBar.fillAmount = hpRatio;
             localHpBar.color = color;
         }
     }
@@ -155,5 +156,10 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         GetComponent<Rigidbody>().AddForce(jumpForce, ForceMode.Impulse);
+    }
+
+    internal void TakeDamage(object atk)
+    {
+        throw new NotImplementedException();
     }
 }
