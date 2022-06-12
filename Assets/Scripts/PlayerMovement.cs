@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("12341234");
         var bullet = GameObject.Instantiate(bulletPrefab, position, rotation);
+        bullet.ownerId = this.id;
         bullet.GetComponent<Rigidbody>().AddForce(bulletForce * bullet.transform.forward, ForceMode.Impulse);
     }
     public void UpdateHpBar()

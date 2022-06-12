@@ -11,8 +11,9 @@ public class WebSocketExperiemnt : MonoBehaviour
     [SerializeField] string host = "localhost";
     [SerializeField] int port = 8080;
     readonly Dictionary<string, PlayerMovement> players = new Dictionary<string, PlayerMovement>();
+    [SerializeField]
+    PlayerMovement[] i_players;
     [SerializeField] string[] ids;
-    [SerializeField] PlayerMovement[] i_players;
     public WebSocket ws;
     [SerializeField]
     string id;
@@ -21,6 +22,8 @@ public class WebSocketExperiemnt : MonoBehaviour
     [SerializeField]
     PlayerMovement playerPrefab;
     event System.Action onceAction;
+
+
     private void OnEnable()
     {
         var url = $"ws://{host}:{port}";
@@ -169,7 +172,7 @@ public class WebSocketExperiemnt : MonoBehaviour
                             Debug.Log("BulletHit1");
                             onceAction += () =>
                             {
-                                Debug.Log("BulletHit2");
+                                Debug.Log($"BulletHit2 : {args.data.id}");
                                 if (players.ContainsKey(args.data.id))
                                 {
                                     Debug.Log("BulletHit3");
