@@ -72,11 +72,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        InitializeImage();
+        if (!isMine) return;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         FindObjectOfType<CameraFollow>().gunPlaceHoder.position = gun.position;
         FindObjectOfType<CameraFollow>().gunPlaceHoder.rotation= gun.rotation;
-        InitializeImage();
     }
 
     private void Update()
