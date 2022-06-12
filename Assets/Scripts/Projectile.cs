@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
                     {
                         id = this.ownerId,
                         hitPlayerId = player.id,
-                        atk = 10
+                        atk = this.atk
                     }
                 };
                 ws.Send(JsonUtility.ToJson(arg));

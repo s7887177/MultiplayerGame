@@ -344,7 +344,7 @@ class BulletEventData
 {
     public string id;
     [SerializeField] public string hitPlayerId;
-    internal float atk;
+    [SerializeField] internal float atk;
 }
 
 class MessageSender
