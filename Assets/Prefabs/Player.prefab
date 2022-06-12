@@ -302,6 +302,7 @@ MonoBehaviour:
   maxHp: 100
   hp: 100
   hpBar: {fileID: 1452879311}
+  localHpBar: {fileID: 0}
   bulletPrefab: {fileID: 5242983626769319178, guid: a02ade695a666244d9edff4c1261b53a, type: 3}
   groundChecker: {fileID: 926128704}
   id: 

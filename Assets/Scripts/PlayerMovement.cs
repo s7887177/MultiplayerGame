@@ -34,9 +34,9 @@ public class PlayerMovement : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
-    public void Fire()
+    public void Fire(Vector3 position, Quaternion rotation)
     {
-        var bullet = GameObject.Instantiate(bulletPrefab, gun.position, gun.rotation);
+        var bullet = GameObject.Instantiate(bulletPrefab, position, rotation);
         bullet.GetComponent<Rigidbody>().AddForce(bulletForce * bullet.transform.forward, ForceMode.Impulse);
     }
     public void UpdateHpBar()
@@ -137,10 +137,12 @@ public class PlayerMovement : MonoBehaviour
                 data = new FireEventData
                 {
                     id = this.id,
+                    bulletPosition = gun.position,
+                    bulletRotation = gun.rotation,
                 }
             };
             ws.Send(JsonUtility.ToJson(args));
-            Fire();
+            Fire(gun.position, gun.rotation);
         }
     }
     private void Jump()

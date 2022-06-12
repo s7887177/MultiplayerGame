@@ -111,6 +111,9 @@ public class WebSocketExperiemnt : MonoBehaviour
                                 {
                                     var player = players[args.data.id];
                                     player.transform.position = args.data.position;
+                                    player.transform.rotation = args.data.rotation;
+                                    player.gun.transform.position = args.data.gunPosition;
+                                    player.gun.transform.rotation = args.data.gunRotation;
                                 }
                             };
                         }
@@ -151,7 +154,7 @@ public class WebSocketExperiemnt : MonoBehaviour
                                 if (players.ContainsKey(args.data.id))
                                 {
                                     var player = players[args.data.id];
-                                    player.Fire();
+                                    player.Fire(args.data.bulletPosition, args.data.bulletRotation);
                                 }
                             };
                         }
@@ -189,6 +192,9 @@ public class WebSocketExperiemnt : MonoBehaviour
             {
                 id = this.id,
                 position = this.player.transform.position,
+                rotation = this.player.transform.rotation,
+                gunPosition = this.player.gun.transform.position,
+                gunRotation = this.player.gun.transform.rotation
             }
         };
         ws.Send(JsonUtility.ToJson(movePlayerArgs));
@@ -260,6 +266,9 @@ class MovePlayerEventData
 {
     [SerializeField] internal string id;
     [SerializeField] internal Vector3 position;
+    [SerializeField] internal Quaternion rotation;
+    [SerializeField] internal Vector3 gunPosition;
+    [SerializeField] internal Quaternion gunRotation;
 }
 [System.Serializable]
 class InitPlayerEventArgs : System.EventArgs
@@ -297,6 +306,8 @@ class FireEventArgs : System.EventArgs
 class FireEventData
 {
     public string id;
+    [SerializeField] public Vector3 bulletPosition;
+    [SerializeField] public Quaternion bulletRotation;
 }
 class MessageSender
 {
