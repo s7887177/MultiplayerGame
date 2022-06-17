@@ -235,10 +235,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae01984001ef964aad1b86606217211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  host: 192.168.242.173
+  host: yifeng.website
   port: 8888
-  ids: []
   i_players: []
+  ids: []
   id: 
   player: {fileID: 854646328}
   playerPrefab: {fileID: 4739100920228929962, guid: 091a9549bd386e443bf2e6ab4d05be32, type: 3}
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 183
 --- !u!114 &1265946143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,6 +743,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 1
   m_AntialiasingQuality: 2
